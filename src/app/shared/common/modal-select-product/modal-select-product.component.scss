@@ -1,0 +1,70 @@
+@use 'mixins' as mixins;
+
+.add-customer-to-segment {
+  .content-modal {
+    display: flex;
+    flex-wrap: wrap;
+
+    .column {
+      .header-column {
+        height: 40px;
+      }
+
+      flex: 1;
+      padding: 10px;
+    }
+
+    .column-left {
+    }
+
+    .column-right {
+    }
+  }
+}
+
+.box {
+  height: 600px;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.item-customer {
+  height: 50px;
+  width: 100%;
+  border-radius: 10px;
+
+  &:hover,
+  &.active {
+    background-color: aliceblue;
+  }
+
+  .info {
+    width: 90%;
+
+    .fullName {
+      width: 150px;
+      @include mixins.limit-text-row(1);
+    }
+    .phone {
+      width: calc(100% - 160px);
+      text-align: right;
+      @include mixins.limit-text-row(1);
+    }
+
+    .list-tag {
+      overflow: hidden;
+
+      .tag-item {
+        flex: 1 1 auto 50px;
+      }
+    }
+  }
+
+  .icon-item {
+    width: 20px;
+  }
+
+  .avatar-user {
+    @include mixins.imageCircle(40px);
+  }
+}

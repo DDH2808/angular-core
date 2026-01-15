@@ -1,0 +1,65 @@
+<div
+  class="file-container center-item"
+  [style.width]="width"
+  [style.height]="height"
+  [class]="class"
+  [class.cursor-pointer]="!disabled"
+  (click)="handleClickInput()"
+>
+  @if (loading) {
+    <div class="loading">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  }
+
+  <input
+    #fileInput
+    type="file"
+    (change)="getFiles($event)"
+    class="input-file input-hide"
+    [attr.accept]="accept"
+    [attr.multiple]="multiple"
+    [disabled]="disabled"
+  />
+
+  <div class="placeholder-input">
+    <ng-container>
+      <div class="icon">
+        <i class="fas fa-cloud-upload-alt"></i>
+      </div>
+      <div class="text fw-500">
+        Click hoặc kéo tài liệu vào khu vực này để tải lên
+      </div>
+      <div class="sub-text fs-7">Dung lượng tối đa: {{ sizeMb }}MB</div>
+      <div class="desc">
+        @switch (typeFile) {
+          @case ('image') {
+            Định dạng hỗ trợ: JPG, JPEG hoặc PNG
+          }
+          @case ('document') {
+            Định dạng hỗ trợ: PDF, DOC, DOCX
+          }
+          @case ('video') {
+            Định dạng hỗ trợ: MP4, WEBM
+          }
+          @case ('audio') {
+            Định dạng hỗ trợ: MP3, WAV
+          }
+          @default {
+            Tất cả định dạng
+          }
+        }
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+@if (files && files?.length) {
+  <div class="file-list">
+    <p>File name: {{ files[0]?.name }}</p>
+    <button type="button" (click)="handleClear()">Hủy</button>
+    <button type="button" (click)="handleSave()">Lưu</button>
+  </div>
+}

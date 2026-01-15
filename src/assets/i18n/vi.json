@@ -1,0 +1,215 @@
+{
+  "auth": {
+    "login": "Đăng nhập",
+    "register": "Đăng ký",
+    "username": "Tên đăng nhập",
+    "forgotPassword": "Quên mật khẩu",
+    "recoverPassword": "Khôi phục mật khẩu",
+    "verifyOtp": "Xác thực OTP",
+    "alreadyHaveAccount": "Bạn đã có tài khoản?",
+    "noAccount": "Bạn chưa có tài khoản?",
+    "resetPassword": "Đặt lại mật khẩu",
+    "sendEmail": "Hệ thống sẽ gửi một email chứa mật khẩu mới",
+    "typeOtp": "Nhập mã OTP",
+    "typeOtpAndPassword": "Nhập mã OTP và Mật khẩu mới",
+    "slogan": "Tạo Người bán hàng ảo chỉ trong vài phút",
+    "field": {
+      "email": "Email",
+      "username": "Tên đăng nhập",
+      "password": "Mật khẩu",
+      "confirmPassword": "Xác nhận mật khẩu",
+      "newPassword": "Mật khẩu mới",
+      "oldPassword": "Mật khẩu cũ",
+      "fullName": "Họ và tên"
+    }
+  },
+  "account": {},
+  "aiSeller": {
+    "general": {
+      "field": {
+        "name": "Tên Trợ lý bán hàng",
+        "welcomeMessage": "Tin nhắn chào mừng",
+        "setupButtons": "Thiết lập nút",
+        "persistentMenu": "Persistent menu",
+        "payment": "Thanh toán",
+        "paymentMethod": "Phương thức thanh toán",
+        "bankBrand": "Ngân hàng",
+        "Account number": "Số tài khoản",
+        "Account name": "Chủ tài khoản",
+        "orderStatus": "Trạng thái đơn hàng",
+        "delivery": "Vận chuyển",
+        "deliveryFee": "Phí vận chuyển"
+      },
+      "orderStatus": {
+        "waitAccept": "Chờ xác nhận",
+        "accepted": "Đã xác nhận",
+        "shipping": "Đang giao hàng",
+        "shipped": "Đã giao",
+        "cancelled": "Đã hủy",
+        "returned": "Trả hàng"
+      },
+      "buttons": {
+        "viewNewArrival": "Xem BST mới",
+        "promotionProgram": "Chương trình khuyến mãi",
+        "suggestProduct": "Tư vấn sản phẩm",
+        "searchOrder": "Tra cứu đơn hàng"
+      },
+      "persistentMenu": {
+        "promotion": "Chương trình khuyến mãi",
+        "storeSystem": "Hệ thống cửa hàng",
+        "returnPolicy": "Chính sách đổi trả",
+        "consultant": "Gặp tư vấn viên"
+      }
+    }
+  },
+  "ecommerce": {
+    "lists-tab": {},
+    "sales-priority": {}
+  },
+  "common": {
+    "button": {
+      "add": "Thêm mới",
+      "edit": "Sửa",
+      "delete": "Xóa",
+      "cancel": "Hủy",
+      "save": "Lưu",
+      "dontSave": "Không lưu",
+      "close": "Đóng",
+      "search": "Tìm kiếm",
+      "reset": "Làm mới",
+      "exportExcel": "Xuất Excel",
+      "importExcel": "Nhập Excel",
+      "import": "Nhập",
+      "export": "Xuất",
+      "back": "Quay lại",
+      "next": "Tiếp theo",
+      "finish": "Hoàn thành",
+      "sampleFile": "File mẫu",
+      "newRequest": "Yêu cầu mới",
+      "preview": "Xem trước",
+      "download": "Tải xuống",
+      "upload": "Tải lên",
+      "submit": "Gửi",
+      "reSetting": "Đặt lại",
+      "sweep": "Quét SL Khách hàng",
+      "confirm": "Xác nhận",
+      "login": "Đăng nhập",
+      "register": "Đăng ký",
+      "resetPass": "Đặt lại mật khẩu"
+    },
+    "module": {
+      "segment": "Nhóm khách hàng",
+      "customer": "Khách hàng",
+      "organization": "Tổ chức",
+      "tag": "Tag",
+      "source": "Kênh bán hàng",
+      "attributes": "Thuộc tính",
+      "setting": "Cài đặt",
+      "management": "Quản trị module Khách hàng"
+    },
+    "pagination": {
+      "previous": "Trước",
+      "next": "Sau",
+      "page": "Trang",
+      "of": "trong tổng số",
+      "rowsPerPage": "số dòng mỗi trang",
+      "all": "Tất cả",
+      "first": "Trang đầu",
+      "last": "Trang cuối",
+      "show": "Hiển thị",
+      "record": "bản ghi"
+    },
+    "error": {
+      "systemError": "Lỗi hệ thống"
+    },
+    "message": {
+      "noData": "Không có dữ liệu",
+      "loading": "Đang tải...",
+      "addTagText": "Thêm tag mới",
+      "management": "Quản lý",
+      "confirmDelete": "Bạn có chắc chắn muốn xóa?",
+      "confirmSave": "Xác nhận lưu",
+      "warningDeleteCustomer": "Cẩn trọng với thao tác xoá bản ghi. Các module khác đang sử dụng dữ liệu của bản ghi cũng sẽ bị ảnh hưởng.",
+      "warningDeleteSegment": "Xóa Nhóm khách hàng có thể ảnh hưởng trực tiếp đến những Broadcast Automation, Chương trình khuyến mãi hoặc Chương trình Marketing đang sử dụng Nhóm khách hàng này.",
+      "descriptionSaveSegment": "Thay đổi các tiêu chí có thể ảnh hưởng trực tiếp đến những Broadcast Automation, Chương trình khuyến mãi hoặc Chương trình Marketing đang sử dụng Nhóm khách hàng này.",
+      "confirmLeaveOrg": "Bạn có chắc chắn muốn xóa khách hàng này khỏi tổ  chức này không?",
+      "confirmDeleteCustomerFromSegment": "Bạn có chắc muốn xoá khách hàng khỏi nhóm này không?",
+      "tabNotExceed": "Số lượng tab không được vượt quá {{quantity}}",
+      "selectValue": "Chọn giá trị",
+      "from": "Từ",
+      "to": "Đến",
+      "value": "Giá trị",
+      "selectedRows": "Đã chọn {{number}} bản ghi",
+      "selectAll": "Chọn tất cả",
+      "batchAction": "Thao tác hàng loạt",
+      "addToSegment": "Thêm vào Nhóm khách hàng",
+      "assignTag": "Gán tag",
+      "unAssignTag": "Bỏ Tag",
+      "mergeRecords": "Hợp nhất bản ghi",
+      "delete": "Xóa",
+      "removeFromSegment": "Xóa khỏi Nhóm khách hàng",
+      "descriptionConfirmDelete": "Tất cả bản ghi được chọn sẽ bị xóa vĩnh viễn khỏi hệ thống.",
+      "descriptionConfirmDeleteCustomer": "Bạn sắp xoá khách hàng <b>{{name}}</b>, hành động này không thể hoàn tác.",
+      "descriptionConfirmDeleteSegment": "Bạn sắp xoá Nhóm khách hàng <b>{{name}}</b>, hành động này không thể hoàn tác.",
+      "descriptionConfirmDeleteAttribute": "Bạn sắp xoá Thuộc tính <b>{{name}}</b>, hành động này không thể hoàn tác.",
+      "descriptionConfirmDeleteTag": "Bạn sắp xoá Tag <b>{{name}}</b>, hành động này không thể hoàn tác."
+    },
+    "validateMessage": {
+      "required": "{{field}} không được để trống",
+      "notExceed": "{{field}} không được vượt quá {{max}} ký tự",
+      "notLess": "{{field}} không được ít hơn {{min}} ký tự",
+      "notMatch": "{{field}} không khớp",
+      "email": "Không đúng định dạng email",
+      "notCorrectFormat": "{{field}} không đúng định dạng",
+      "notSelected": "Vui lòng chọn {{field}}",
+      "checkBoxAtLeast": "Vui lòng chọn ít nhất {{min}} giá trị",
+      "validateKey": "Chỉ nhập chữ hoặc số và viết liền không dấu",
+      "fromTo": "Giá trị từ phải nhỏ hơn giá trị đến"
+    },
+    "placeHolder": {
+      "search": "Tìm kiếm...",
+      "typeToSearch": "Nhập để tìm kiếm",
+      "type": "Nhập {{field}}",
+      "select": "Chọn {{field}}",
+      "selectDate": "Chọn ngày {{field}}",
+      "selectTime": "Chọn thời gian",
+      "selectDateTime": "Chọn ngày giờ",
+      "selectRangeDate": "Chọn khoảng ngày",
+      "selectRangeTime": "Chọn khoảng thời gian",
+      "selectRangeDateTime": "Chọn khoảng ngày giờ"
+    },
+    "header": {
+      "logout": "Đăng xuất",
+      "management": "Quản trị",
+      "profile": "Thông tin cá nhân",
+      "changePassword": "Đổi mật khẩu"
+    },
+    "dateTime": {
+      "minute": "phút",
+      "hour": "giờ",
+      "day": "ngày",
+      "month": "tháng",
+      "year": "năm",
+      "ago": "trước",
+      "after": "sau"
+    },
+    "messageError": {
+      "disconnected": "Mất kết nối với máy chủ",
+      "failure": "Yêu cầu thất bại",
+      "timeout": "Yêu cầu quá hạn",
+      "notPermission": "Bạn không có quyền truy cập",
+      "cannotDetermine": "Lỗi không xác định. Vui lòng thử lại!",
+      "notFound": "Không tìm thấy dữ liệu",
+      "errorOccurred": "Đã có lỗi xảy ra! Vui lòng thử lại sau.",
+      "lastItemIsProcessing": "Có bản ghi đang được xử lý. Vui lòng thử lại sau!",
+      "TAG.TAG_NAME_EXISTED": "Tag đã tồn tại trong hệ thống!"
+    },
+    "messageSuccess": {
+      "success": "Thành công",
+      "createSuccess": "Tạo thành công",
+      "updateSuccess": "Cập nhật thành công",
+      "deleteSuccess": "Xóa thành công",
+      "getSuccess": "Lấy dữ liệu thành công"
+    }
+  }
+}

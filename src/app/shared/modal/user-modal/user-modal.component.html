@@ -1,0 +1,147 @@
+<form nz-form [formGroup]="form">
+  <nz-row [nzGutter]="16">
+    <nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzRequired>Mã cán bộ</nz-form-label>
+        <nz-form-control
+          [nzSpan]="24"
+          nzErrorTip="Vui lòng nhập mã cán bộ!"
+          [nzHasFeedback]="true"
+        >
+          <input
+            nz-input
+            nz-form-large
+            formControlName="username"
+            placeholder="Nhập mã cán bộ"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+
+    <nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzRequired>Tên cán bộ</nz-form-label>
+        <nz-form-control
+          [nzSpan]="24"
+          nzErrorTip="Vui lòng nhập Tên cán bộ!"
+          [nzHasFeedback]="true"
+        >
+          <input
+            nz-input
+            nz-form-large
+            formControlName="fullName"
+            placeholder="Nhập Tên cán bộ"
+          />
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+
+    <nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzFor="password" [nzRequired]="!user">
+          {{
+            user
+              ? 'Đặt mật khẩu mới (để trống nếu không thay đổi mật khẩu)'
+              : 'Mật khẩu'
+          }}
+        </nz-form-label>
+
+        <nz-form-control [nzSpan]="24" [nzErrorTip]="passwordErrorTpl">
+          <nz-input-group nzSize="large" [nzSuffix]="suffixTemplate">
+            <input
+              [type]="passwordVisible ? 'text' : 'password'"
+              nz-input
+              placeholder="Nhập mật khẩu"
+              formControlName="password"
+            />
+          </nz-input-group>
+          <ng-template #suffixTemplate>
+            <span
+              nz-icon
+              class="pe-auto"
+              [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+              (click)="passwordVisible = !passwordVisible"
+            ></span>
+          </ng-template>
+        </nz-form-control>
+
+        <ng-template #passwordErrorTpl let-control>
+          <ng-container *ngIf="!user && control.hasError('required')">
+            Vui lòng nhập mật khẩu!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('minlength')">
+            Mật khẩu phải có ít nhất 6 ký tự!
+          </ng-container>
+        </ng-template>
+      </nz-form-item>
+    </nz-col>
+
+    <nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzRequired>Quyền hạn</nz-form-label>
+        <nz-form-control
+          [nzSpan]="24"
+          nzErrorTip="Vui lòng chọn Quyền hạn!"
+          [nzHasFeedback]="true"
+        >
+          <nz-select
+            nz-form-large
+            formControlName="role"
+            nzPlaceHolder="Chọn Quyền hạn"
+          >
+            <nz-option
+              [nzValue]="ERole.Admin"
+              [nzLabel]="'Quản trị'"
+            ></nz-option>
+            <nz-option
+              [nzValue]="ERole.User"
+              [nzLabel]="'Người dùng'"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+
+    <nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzRequired>Trạng thái</nz-form-label>
+        <nz-form-control
+          [nzSpan]="24"
+          nzErrorTip="Vui lòng chọn trạng thái!"
+          [nzHasFeedback]="true"
+        >
+          <nz-select
+            nz-form-large
+            formControlName="status"
+            nzPlaceHolder="Chọn trạng thái"
+          >
+            <nz-option
+              [nzValue]="EStatus.ACTIVE"
+              [nzLabel]="'Kích hoạt'"
+            ></nz-option>
+            <nz-option
+              [nzValue]="EStatus.IN_ACTIVE"
+              [nzLabel]="'Tạm dừng'"
+            ></nz-option>
+            <nz-option
+              [nzValue]="EStatus.DELETED"
+              [nzLabel]="'Đã xóa'"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </nz-col>
+  </nz-row>
+</form>
+
+<div nzModalFooter class="d-flex justify-content-end gap-3 mt-4">
+  <button nz-button nzType="default" (click)="onCancel()">Hủy</button>
+  <button
+    nz-button
+    nzType="primary"
+    [nzLoading]="isSubmitting"
+    (click)="onSave()"
+  >
+    Lưu
+  </button>
+</div>

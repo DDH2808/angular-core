@@ -1,0 +1,60 @@
+.custom-toast-notify {
+  display: none;
+  opacity: 0;
+  transition: 0.3s;
+  position: absolute;
+  top: 16px;
+  right: 30px;
+
+  &.show {
+    display: block;
+    opacity: 1;
+  }
+
+  > div {
+    border-radius: 12px;
+    border: 1px solid;
+
+    &.ERROR {
+      border-color: #ef6a6a;
+      background-color: #fff0f0;
+
+      .icon-status {
+        background-color: #ef6a6a;
+      }
+    }
+
+    &.PROGRESSING {
+      border-color: #187dc8;
+      background-color: #eefdf5;
+
+      .btn {
+        color: #187dc8;
+      }
+    }
+
+    &.SUCCESS {
+      border-color: #53b27f;
+      background-color: #eefdf5;
+
+      .icon-status {
+        background-color: #53b27f;
+      }
+
+      .btn {
+        color: #53b27f;
+      }
+    }
+
+    .icon-status {
+      padding: 8px;
+      border-radius: 12px;
+    }
+
+    .fa-spinner {
+      color: #187dc8;
+      font-size: 25px;
+      margin-left: 5px;
+    }
+  }
+}

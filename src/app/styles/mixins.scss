@@ -1,0 +1,423 @@
+@mixin box($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin calculateSize(
+  $property,
+  $minuend: '0px',
+  $subtrahend1: '0px',
+  $subtrahend2: '0px',
+  $subtrahend3: '0px',
+  $subtrahend4: '0px'
+) {
+  #{$property}: calc(
+    #{$minuend} - #{$subtrahend1} - #{$subtrahend2} - #{$subtrahend3} -
+      #{$subtrahend4}
+  );
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: '') {
+  -webkit-box-shadow: $top $left $blur $color #{$inset};
+  -moz-box-shadow: $top $left $blur $color #{$inset};
+  box-shadow: $top $left $blur $color #{$inset};
+}
+
+@mixin limit-text-row($number) {
+  overflow: hidden;
+  line-clamp: $number;
+  display: -webkit-box;
+  -webkit-line-clamp: $number;
+  -webkit-box-orient: vertical;
+}
+
+@mixin imageCircle($size) {
+  width: $size;
+  height: $size;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+@mixin input-placeholder {
+  &.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+
+@mixin font-source($size: false, $colour: false, $weight: false, $lh: false) {
+  @if $size {
+    font-size: $size;
+  }
+  @if $colour {
+    color: $colour;
+  }
+  @if $weight {
+    font-weight: $weight;
+  }
+  @if $lh {
+    line-height: $lh;
+  }
+}
+
+@mixin pseudo(
+  $width: 100%,
+  $height: 100%,
+  $display: inline-block,
+  $pos: absolute,
+  $content: ''
+) {
+  content: $content;
+  display: $display;
+  position: $pos;
+  @include box($width, $height);
+}
+
+@mixin custom-scrollbar() {
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    cursor: auto;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+
+    &:hover {
+      background: #f1f1f1;
+    }
+  }
+
+  &::-webkit-scrollbar-thumb {
+    cursor: auto;
+    background: #8c8c8c;
+    border-radius: 5px;
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #9e9e9e;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      display: block;
+    }
+  }
+}
+
+@mixin flexBox($align: flex-start, $justify: flex-start, $direction: row) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $direction;
+}
+
+@mixin flexGap($gap_y, $gap_x) {
+  gap: $gap_y $gap_x;
+}
+
+@mixin textDecoration($fs, $fw, $lh, $color: #141415) {
+  font-size: $fs;
+  font-weight: $fw;
+  line-height: 20px;
+  color: $color;
+}
+
+@mixin decorateText($fs, $fw, $color: #141415) {
+  font-size: $fs;
+  font-weight: $fw;
+  color: $color;
+}
+
+@mixin imageConfig($w, $h, $objectFit) {
+  width: $w;
+  height: $h;
+  object-fit: $objectFit;
+}
+
+@mixin overText($w, $line: 1) {
+  max-width: $w;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin overTextMultiLine($w, $line: 1) {
+  display: -webkit-box;
+  max-width: $w;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin positionAbsoluteConfig(
+  $w: 100%,
+  $h: 100%,
+  $top: 0,
+  $left: 0,
+  $zIndex: 0
+) {
+  position: absolute;
+  width: $w;
+  height: $h;
+  top: $top;
+  left: $left;
+  z-index: $zIndex;
+}
+
+@mixin positionAbsoluteConfigWithRight(
+  $w: 100%,
+  $h: 100%,
+  $top: 0,
+  $right: 0,
+  $zIndex: 0
+) {
+  position: absolute;
+  width: $w;
+  height: $h;
+  top: $top;
+  right: $right;
+  z-index: $zIndex;
+}
+
+@mixin changeColorSVG($color) {
+  svg path {
+    &:where([stroke]) {
+      stroke: $color;
+    }
+
+    &:where([fill]) {
+      fill: $color;
+    }
+  }
+}
+
+@mixin changeSizeSVG($size) {
+  svg {
+    width: $size;
+    height: $size;
+  }
+}
+
+@mixin text-italic-1 {
+  font-size: 0.8125rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 0.9375rem;
+}
+
+@mixin text-size-1 {
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1rem;
+}
+
+@mixin text-size-1-slight {
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem;
+}
+
+@mixin text-size-2 {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.125rem;
+}
+
+@mixin text-size-2-slight {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.125rem;
+}
+
+@mixin text-size-4 {
+  font-size: 2.5rem;
+  font-style: normal;
+  font-weight: 500;
+  // line-height: 2.625rem;
+}
+
+@mixin text-size-7 {
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+@mixin text-size-8 {
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+@mixin text-size-9 {
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.875rem;
+}
+
+@mixin text-size-3 {
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.625rem;
+}
+
+@mixin text-size-5 {
+  font-size: 3.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 4rem;
+}
+
+@mixin text-size-6 {
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 600;
+  // line-height: 4rem;
+}
+
+.text-italic-1 {
+  @include text-italic-1;
+}
+
+.text-size-1 {
+  @include text-size-1;
+}
+
+.text-size-1-slight {
+  @include text-size-1-slight;
+}
+
+.text-size-2 {
+  @include text-size-2;
+}
+
+.text-size-2-slight {
+  @include text-size-2-slight;
+}
+
+.text-size-3 {
+  @include text-size-3;
+}
+
+.text-size-4 {
+  @include text-size-4;
+}
+
+.text-size-5 {
+  @include text-size-5;
+}
+
+.text-size-6 {
+  @include text-size-6;
+}
+
+.text-size-7 {
+  @include text-size-7;
+}
+
+.text-size-8 {
+  @include text-size-8;
+}
+
+.text-size-9 {
+  @include text-size-9;
+}
+
+a.btn {
+  text-decoration: none !important;
+  align-content: center;
+}
+
+.btn-sm {
+  padding: 0 24px;
+  @include text-size-1;
+  height: 40px;
+}
+
+.btn-lg {
+  padding: 0 32px;
+  @include text-size-1;
+  height: 48px;
+}
+
+.btn-xl {
+  padding: 0 32px;
+  @include text-size-2;
+  height: 64px !important;
+}
+
+.bg-green {
+  background: var(--secondary-600-base, #00bd56);
+}
+
+.bg-blue {
+  background: var(--primary-600-base);
+}
+
+.bg-gray {
+  background: var(--Black-50) !important;
+}
+
+.bg-white {
+  background: var(--White-950) !important;
+}
+
+.text-green {
+  color: var(--secondary-600-base, #00bd56);
+}
+
+.text-blue {
+  color: var(--primary-600-base) !important;
+}
+
+.text-black {
+  color: var(--Black-950);
+}
+
+.text-gray {
+  color: var(--Black-700, #bdbdbd) !important;
+}
+
+.border-top-1 {
+  border-top: 1px solid var(--Black-50, #292929);
+}
+
+.text-truncate-line-clamp {
+  @for $i from 1 through 100 {
+    &-v#{$i} {
+      display: -webkit-box;
+      -webkit-line-clamp: #{$i};
+      -webkit-box-orient: vertical;
+      width: inherit;
+      overflow: hidden;
+      line-height: unset !important;
+    }
+  }
+}

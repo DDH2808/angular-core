@@ -1,0 +1,14 @@
+<div class="wrapper-main d-md-flex justify-content-between">
+  <div class="side">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="main-content custom-scrollbar">
+    <app-header (clickToggle)="handleToggle()"></app-header>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<modal-confirm></modal-confirm>
+<app-image-preview></app-image-preview>

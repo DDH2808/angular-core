@@ -1,0 +1,92 @@
+<div class="{{ class }}">
+  @if (discounts?.length) {
+    @for (discount of discounts; track $index) {
+      @switch (discount.promoType) {
+        @case (EPromotionType.BUY_X_GET_Y) {
+          @if (discount.promo.getY) {
+            <div class="mb-3">
+              <ng-container
+                [ngTemplateOutlet]="templateGift"
+                [ngTemplateOutletContext]="{
+                  giftProducts: gifts,
+                  getY: discount.promo.getY,
+                }"
+              ></ng-container>
+            </div>
+            <ng-template
+              #templateGift
+              let-giftProducts="giftProducts"
+              let-getY="getY"
+            >
+              <div class="list-product-gifts d-flex flex-column">
+                @for (gift of giftProducts; track $index) {
+                  <div
+                    class="product-gift my-2 d-flex flex-column flex-wrap gap-2"
+                  >
+                    <div class="gift-item">
+                      <img
+                        src="{{ gift?.parentProduct?.mediaUrls?.[0]?.url }}"
+                        alt="gift"
+                        class="product-picture"
+                      />
+                      <div
+                        class="gift-detail d-flex gap-2 align-items-center"
+                        [style.width]="'calc(100% - 60px)'"
+                      >
+                        <div class="gift-badge">Quà tặng</div>
+                        <div class="quantity">x{{ gift.quantity }}</div>
+                        <div class="d-flex flex-column flex-1">
+                          <div class="product-name fw-500">
+                            {{ gift?.parentProduct?.name || '-' }}
+                          </div>
+                          <div class="price-detail d-flex gap-2">
+                            <span class="origin-price">
+                              {{ (gift.price | number) || '-' }}đ
+                            </span>
+                            <span
+                              class="bargain-price d-flex justify-content-between flex-1"
+                            >
+                              @switch (getY.type) {
+                                @case (EPromoGetYType.FREE) {
+                                  {{
+                                    (gift.totalPaymentAmount | number) || '-'
+                                  }}đ
+                                }
+                                @case (EPromoGetYType.BY_PERCENT) {
+                                  <div>
+                                    {{
+                                      (gift.totalPaymentAmount || 0 | number) ||
+                                        '-'
+                                    }}đ
+                                  </div>
+                                  <div class="reduction-value">
+                                    Giảm giá
+                                    {{ getY.reductionValue || 0 | number }}%
+                                  </div>
+                                }
+                                @case (EPromoGetYType.BY_AMOUNT) {
+                                  {{
+                                    (gift.totalPaymentAmount || 0 | number) ||
+                                      '-'
+                                  }}đ
+                                  <div class="reduction-value">
+                                    Giảm giá
+                                    {{ getY.reductionValue || 0 | number }}đ
+                                  </div>
+                                }
+                              }
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+            </ng-template>
+          }
+        }
+      }
+    }
+  }
+</div>

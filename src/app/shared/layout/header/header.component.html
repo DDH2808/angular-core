@@ -1,0 +1,40 @@
+<div class="navbar-component d-md-none">
+  <div
+    class="frame-avatar h-100 d-flex justify-content-between align-items-center"
+  >
+    <div class="logo-details d-flex align-items-center gap-2">
+      <button
+        class="border-0 bg-transparent text-white fs-3"
+        (click)="toggleBar()"
+      >
+        <i class="fa-solid fa-bars" id="btn"></i>
+      </button>
+      <img width="40" src="./assets/images/sidebar/logo.png" alt="logo" />
+    </div>
+
+    <div class="btn-group" dropdown placement="bottom right">
+      <img
+        id="button-alignment"
+        dropdownToggle
+        class="avatar"
+        aria-controls="dropdown-alignment"
+        src="{{ user?.avatar || './assets/images/default-avatar.jpg' }}"
+        alt="avatar"
+      />
+      <ul
+        id="dropdown-alignment"
+        *dropdownMenu
+        class="dropdown-menu dropdown-menu-right"
+        role="menu"
+        aria-labelledby="button-alignment"
+      >
+        <li role="menuitem">
+          <a class="dropdown-item" href="//account">Thông tin cá nhân</a>
+        </li>
+        <li role="menuitem" (click)="logout()">
+          <a class="dropdown-item" href="#">Đăng xuất</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

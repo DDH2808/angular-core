@@ -1,0 +1,97 @@
+<div class="table-responsive tableFixHead custom-scrollbar">
+  <div class="header-table d-flex align-items-center gap-2">
+    <div [style.width]="'300px'">
+      <custom-input-search
+        [className]="'input-medium'"
+        (searchEvent)="onSearchData($event)"
+        [placeholder]="'Tìm kiếm...'"
+      ></custom-input-search>
+    </div>
+    <div>
+      <nz-select
+        nzShowSearch
+        nzAllowClear
+        nzPlaceHolder="Select a person"
+        [(ngModel)]="selectedValue"
+        (ngModelChange)="onChange($event)"
+      >
+        <nz-option
+          *ngFor="let option of eGates.rows"
+          [nzLabel]="option.eGateCode + ' ' + option.note"
+          [nzValue]="option.eGateCode"
+        ></nz-option>
+      </nz-select>
+    </div>
+    <div>
+      <nz-range-picker></nz-range-picker>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th class="column-content">Mã trạm</th>
+        <th class="column-status">Tên admin trạm</th>
+        <th class="column-action">Mã cán bộ trạm</th>
+        <th class="column-action">Mã cán bộ phụ trách</th>
+        <th class="column-action">Ghi chú</th>
+        <th class="column-action">Người sửa</th>
+        <th class="column-action">Ngày sửa</th>
+        <th class="column-action">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="accounts.loading" class="text-center">
+        <td colspan="12">
+          <div class="spinner-grow text-primary" role="status">
+            <span class="visually-hidden">Loading</span>
+          </div>
+          <div>Loading</div>
+        </td>
+      </tr>
+      <tr *ngFor="let row of accounts.rows; let i = index">
+        <td class="column-title">
+          <div class="fw-500">{{ row.id }}</div>
+        </td>
+        <td class="column-content">
+          <div>{{ row.eGateCode ?? '-' }}</div>
+        </td>
+        <td>
+          <div>{{ row.account?.fullName ?? '-' }}</div>
+        </td>
+        <td>
+          <div>{{ row.account?.staffCode ?? '-' }}</div>
+        </td>
+        <td>
+          <div>{{ row.account?.centerInChargeStaffCode ?? '-' }}</div>
+        </td>
+        <td>
+          <div>{{ row.account?.note ?? '-' }}</div>
+        </td>
+        <td>
+          <div>{{ row.updatedBy?.username ?? '-' }}</div>
+        </td>
+        <td>
+          <div>{{ row.updatedAt ?? '-' }}</div>
+        </td>
+        <td>
+          <div class="d-flex justify-content-center cursor-pointer">
+            <img src="../../assets/images/icon/edit.svg" class="my-4" />
+          </div>
+        </td>
+      </tr>
+
+      <tr
+        *ngIf="!accounts.loading && !accounts.rows?.length"
+        class="text-center"
+      >
+        <td colspan="12">
+          <img src="../../assets/images/icon/empty-state.svg" class="my-4" />
+          <div class="fw-bold">Chưa có dữ liệu</div>
+          <div>Hãy thêm mới nội dung!</div>
+          <button class="btn custom-empty-upload">Tạo mới</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

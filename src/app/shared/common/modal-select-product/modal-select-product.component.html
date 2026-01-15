@@ -1,0 +1,150 @@
+<div>
+  <div class="add-customer-to-segment">
+    <app-custom-modal
+      (submitModal)="onSubmit()"
+      [textOk]="'Xác nhận'"
+      [isSubmitting]="loading.submit"
+    >
+      <ng-container modalTitle>Cập nhật sản phẩm</ng-container>
+      <ng-container modalBody>
+        <form [formGroup]="form">
+          <div class="content-modal">
+            <div class="column column-left">
+              <div class="header-column">
+                <custom-input-search
+                  (searchEvent)="onSearchProduct($event)"
+                  [placeholder]="'Tìm kiếm...'"
+                ></custom-input-search>
+              </div>
+              <div class="list-customer mt-3">
+                <div
+                  class="text-center"
+                  *ngIf="!dataSource.rows.length && !dataSource.loading"
+                >
+                  Không có dữ liệu
+                </div>
+                <cdk-virtual-scroll-viewport
+                  (scrolledIndexChange)="
+                    nextBatch($event, dataSource.rows.length / limit + 1)
+                  "
+                  itemSize="50"
+                  class="box custom-scrollbar"
+                >
+                  <div
+                    class="item-customer d-flex gap-2 align-items-center justify-content-between px-2 cursor-pointer"
+                    *cdkVirtualFor="
+                      let row of dataSource.rows;
+                      let i = index;
+                      trackBy: trackByIdx
+                    "
+                    (click)="selectProduct(row)"
+                    [ngClass]="{active: selectedProductIds?.includes(row.id)}"
+                  >
+                    <div class="info d-flex align-items-center">
+                      <img
+                        class="avatar-user me-2"
+                        [src]="
+                          row?.mediaUrls?.[0]?.url ||
+                          'assets/images/no-photo.jpeg'
+                        "
+                        fallback="assets/images/no-photo.jpeg"
+                        width="40"
+                        height="40"
+                        alt=""
+                      />
+                      <div class="d-flex flex-column w-100">
+                        <div class="d-flex justify-content-between">
+                          <div class="fw-500 fullName">{{ row.name }}</div>
+                          <div class="phone">{{ row?.phone }}</div>
+                        </div>
+                        <div
+                          *ngIf="row?.tags?.length"
+                          class="list-tag d-flex flex-nowrap gap-2"
+                        >
+                          <span
+                            *ngFor="let tag of row?.tags"
+                            class="text-capitalize tag-item tag-nameless"
+                            [ngClass]="{nonBack: !tag.bgColor}"
+                            [ngStyle]="{background: tag.bgColor}"
+                            tooltip="{{ tag.name }}"
+                            placement="bottom"
+                          >
+                            <span>&nbsp;</span>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="list-tag"></div>
+                    </div>
+                    <div class="icon-item checked">
+                      <img
+                        *ngIf="selectedProductIds?.includes(row.id)"
+                        src="assets/images/icon/check.svg"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                  <div *ngIf="dataSource.loading" class="w-100 text-center">
+                    <div class="spinner-border" role="status">
+                      <span class="sr-only">Loading</span>
+                    </div>
+                  </div>
+                </cdk-virtual-scroll-viewport>
+              </div>
+            </div>
+            <div class="column column-right">
+              <div class="header-column d-flex align-items-center">
+                <p class="fw-500 mb-0">
+                  {{
+                    'Đã chọn' +
+                      ': ' +
+                      selectedProducts?.length +
+                      ' ' +
+                      'sản phẩm'
+                  }}
+                </p>
+              </div>
+              <div class="list-customer mt-3">
+                <cdk-virtual-scroll-viewport
+                  itemSize="50"
+                  class="box custom-scrollbar"
+                >
+                  <div class="text-center" *ngIf="!selectedProducts?.length">
+                    Chưa có sản phẩm nào được chọn
+                  </div>
+                  <div
+                    class="item-customer d-flex gap-2 align-items-center justify-content-between px-2"
+                    *cdkVirtualFor="let row of selectedProducts; let i = index"
+                  >
+                    <div class="info d-flex gap-2 align-items-center">
+                      <img
+                        class="avatar-user"
+                        [src]="
+                          row?.mediaUrls?.[0]?.url ||
+                          'assets/images/no-photo.jpeg'
+                        "
+                        fallback="assets/images/no-photo.jpeg"
+                        alt=""
+                      />
+                      <div>
+                        <span class="fw-500 fullName">{{ row.name }}</span>
+                      </div>
+                    </div>
+                    <div class="actions">
+                      <button
+                        type="button"
+                        (click)="removeProduct(row.id)"
+                        class="btn d-flex justify-content-center align-items-center"
+                      >
+                        <i class="fa-solid fa-xmark"></i>
+                      </button>
+                    </div>
+                  </div>
+                </cdk-virtual-scroll-viewport>
+              </div>
+            </div>
+          </div>
+        </form>
+      </ng-container>
+    </app-custom-modal>
+  </div>
+</div>

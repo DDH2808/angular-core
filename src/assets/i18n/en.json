@@ -1,0 +1,215 @@
+{
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "username": "Username",
+    "forgotPassword": "Forgot password",
+    "recoverPassword": "Recover password",
+    "verifyOtp": "Verify OTP",
+    "alreadyHaveAccount": "Do you already have an account?",
+    "noAccount": "You don't have an account yet?",
+    "resetPassword": "Reset password",
+    "typeOtp": "Type OTP",
+    "typeOtpAndPassword": "Type OTP and NewPassword",
+    "sendEmail": "The system will send an email containing a new password",
+    "slogan": "Craft your AI Seller in a minute",
+    "field": {
+      "email": "Email",
+      "username": "Tên đăng nhập",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "newPassword": "New password",
+      "oldPassword": "Old password",
+      "fullName": "Full name"
+    }
+  },
+  "account": {},
+  "aiSeller": {
+    "general": {
+      "field": {
+        "name": "Seller name",
+        "welcomeMessage": "Welcome message",
+        "setupButtons": "Setup buttons",
+        "persistentMenu": "Persistent menu",
+        "payment": "Payment",
+        "paymentMethod": "Payment method",
+        "bankBrand": "Bank brand",
+        "Account number": "Account number",
+        "Account name": "Account name",
+        "orderStatus": "Order status",
+        "delivery": "Delivery",
+        "deliveryFee": "Delivery fee"
+      },
+      "orderStatus": {
+        "waitAccept": "Wait accept",
+        "accepted": "Accepted",
+        "shipping": "Shipping",
+        "shipped": "Shipped",
+        "cancelled": "Cancelled",
+        "returned": "Returned"
+      },
+      "buttons": {
+        "viewNewArrival": "View new arrival",
+        "promotionProgram": "Promotion program",
+        "suggestProduct": "Suggest product",
+        "searchOrder": "Search order"
+      },
+      "persistentMenu": {
+        "promotion": "Promotion",
+        "storeSystem": "Store system",
+        "returnPolicy": "Return policy",
+        "consultant": "Consultant"
+      }
+    }
+  },
+  "ecommerce": {
+    "lists-tab": {},
+    "sales-priority": {}
+  },
+  "common": {
+    "button": {
+      "add": "Add New",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "save": "Save",
+      "dontSave": "Don't Save",
+      "close": "Close",
+      "search": "Search",
+      "reset": "Reset",
+      "exportExcel": "Export Excel",
+      "importExcel": "Import Excel",
+      "import": "Import",
+      "export": "Export",
+      "back": "Back",
+      "next": "Next",
+      "finish": "Finish",
+      "sampleFile": "Sample File",
+      "newRequest": "New Request",
+      "preview": "Preview",
+      "download": "Download",
+      "upload": "Upload",
+      "submit": "Submit",
+      "reSetting": "Reset",
+      "sweep": "Sweep",
+      "confirm": "Confirm",
+      "login": "Login",
+      "register": "Register",
+      "resetPass": "Reset Password"
+    },
+    "module": {
+      "segment": "Segment",
+      "customer": "Customer",
+      "organization": "Organization",
+      "tag": "Tag",
+      "source": "Source",
+      "attributes": "Attributes",
+      "setting": "Setting",
+      "management": "Management module Customer"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page",
+      "of": "of",
+      "rowsPerPage": "rows per page",
+      "all": "All",
+      "first": "First",
+      "last": "Last",
+      "show": "Show",
+      "record": "records"
+    },
+    "error": {
+      "systemError": "System Error"
+    },
+    "message": {
+      "noData": "No data",
+      "loading": "Loading...",
+      "addTagText": "Add new tag",
+      "management": "Management",
+      "confirmDelete": "Are you sure you want to delete?",
+      "confirmSave": "Confirm saving",
+      "warningDeleteCustomer": "Be careful when deleting a record. Other modules using the record's data will also be affected effects.",
+      "warningDeleteSegment": "Deleting an Account Group can directly affect Broadcast Automations, Promotions or Marketing Programs that are using this Customer Group.",
+      "descriptionSaveSegment": "Change the criteria that may directly impact which Broadcast Automation, Promotions, or Marketing Programs are using this Account Group.",
+      "confirmLeaveOrg": "Are you sure you want to remove this customer from this organization ?",
+      "confirmDeleteCustomerFromSegment": "Are you sure you want to delete customers from this group?",
+      "tabNotExceed": "The number of tabs cannot exceed {{quantity}}",
+      "selectValue": "Select value",
+      "from": "From",
+      "to": "To",
+      "value": "Value",
+      "selectedRows": "Selected {{number}} records",
+      "selectAll": "Select all ",
+      "batchAction": "Batch Action",
+      "addToSegment": "Add to Customer Group",
+      "assignTag": "Assign Tag",
+      "unAssignTag": "Remove Tag",
+      "mergeRecords": "Merge record",
+      "delete": "Delete",
+      "removeFromSegment": "Remove from Customer Group",
+      "descriptionConfirmDelete": "All selected records will be permanently deleted from the system.",
+      "descriptionConfirmDeleteCustomer": "You are about to delete customer <b>{{name}}<b>, this action cannot be undone.",
+      "descriptionConfirmDeleteSegment": "You are about to delete Customer Group <b>{{name}}<b> , this action cannot be undone.",
+      "descriptionConfirmDeleteAttribute": "You are about to delete Attribute <b>{{name}}<b> , this action cannot be undone.",
+      "descriptionConfirmDeleteTag": "You are about to delete Tag <b>{{name}}<b> , this action cannot be undone."
+    },
+    "validateMessage": {
+      "required": "{{field}} is required",
+      "notExceed": "{{field}} must not exceed {{max}} characters",
+      "notLess": "{{field}} must have at least {{min}} characters",
+      "notMatch": "{{field}} does not match",
+      "email": "Invalid email format",
+      "notCorrectFormat": "{{field}} incorrect format",
+      "notSelected": "Please select {{field}}",
+      "checkBoxAtLeast": "Please select at least {{min}} value(s)",
+      "validateKey": "Only letters, numbers, and spacings are not allowed",
+      "fromTo": "From must be less than To"
+    },
+    "placeHolder": {
+      "search": "Search...",
+      "typeToSearch": "Type to search",
+      "type": "Type {{field}}",
+      "select": "Select {{field}}",
+      "selectDate": "Select date",
+      "selectTime": "Select time",
+      "selectDateTime": "Select date and time",
+      "selectRangeDate": "Select date range",
+      "selectRangeTime": "Select time range",
+      "selectRangeDateTime": "Select date and time range"
+    },
+    "header": {
+      "logout": "Logout",
+      "management": "Management",
+      "profile": "Profile",
+      "changePassword": "Change Password"
+    },
+    "dateTime": {
+      "minute": "minute",
+      "hour": "hour",
+      "day": "day",
+      "month": "month",
+      "year": "month",
+      "ago": "ago",
+      "after": "after"
+    },
+    "messageError": {
+      "disconnected": "Disconnected to server",
+      "failure": "Request failed",
+      "timeout": "Request timeout",
+      "notPermission": "You do not have permission to access",
+      "cannotDetermine": "Cannot determine the error!",
+      "notFound": "Not found",
+      "errorOccurred": "Errors has occurred! Please try again later",
+      "lastItemIsProcessing": "Last Item Is Processing",
+      "TAG.TAG_NAME_EXISTED": "Tag is already existed!"
+    },
+    "messageSuccess": {
+      "success": "Success",
+      "createSuccess": "Create successfully",
+      "updateSuccess": "Update successfully",
+      "deleteSuccess": "Delete successfully",
+      "getSuccess": "Get data successfully"
+    }
+  }
+}

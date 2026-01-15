@@ -1,0 +1,53 @@
+.file-container {
+  border: 2px dashed #d9d9d9;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.center-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-hide {
+  display: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.icon i {
+  font-size: 40px;
+  color: #1890ff;
+}
+
+.text {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.sub-text {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #888;
+}
+
+.desc {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #888;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.1);
+}

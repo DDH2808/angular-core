@@ -1,0 +1,138 @@
+<h4 class="mb-6">Lịch sử thao tác cán bộ</h4>
+
+<form nz-form (ngSubmit)="search()" class="search-form">
+  <div
+    class="search-toolbar"
+    style="
+      margin-bottom: 16px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    "
+  >
+    <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap">
+      <nz-input-group
+        nzSize="large"
+        [nzPrefix]="prefixIconSearch"
+        [nzSuffix]="inputClearTpl"
+        style="width: 200px"
+      >
+        <input
+          nz-input
+          nzAllowClear
+          placeholder="Mã cán bộ"
+          [(ngModel)]="username"
+          name="username"
+        />
+      </nz-input-group>
+      <ng-template #prefixIconSearch>
+        <span nz-icon nzType="search"></span>
+      </ng-template>
+      <ng-template #inputClearTpl>
+        @if (username) {
+          <span
+            nz-icon
+            class="ant-input-clear-icon"
+            nzTheme="fill"
+            nzType="close-circle"
+            (click)="username = ''"
+          ></span>
+        }
+      </ng-template>
+
+      <nz-select
+        [(ngModel)]="eventType_in"
+        nzAllowClear
+        nzMode="multiple"
+        nz-form-large
+        [nzMaxTagCount]="1"
+        name="eventType_in"
+        nzPlaceHolder="Sự kiện"
+        style="width: 320px"
+      >
+        <nz-option
+          *ngFor="let option of optionsEventypes"
+          [nzValue]="option.value"
+          [nzLabel]="option.label"
+        ></nz-option>
+      </nz-select>
+
+      <nz-select
+        [(ngModel)]="actionType_in"
+        nzAllowClear
+        nz-form-large
+        nzMode="multiple"
+        name="actionType_in"
+        [nzMaxTagCount]="1"
+        nzPlaceHolder="Loại hoạt động"
+        style="width: 240px"
+      >
+        <nz-option
+          *ngFor="let option of optionsActionTypes"
+          [nzValue]="option.value"
+          [nzLabel]="option.label"
+        ></nz-option>
+      </nz-select>
+
+      <nz-range-picker
+        [(ngModel)]="createdAt_range"
+        name="createdAt_range"
+        nz-form-large
+        [nzPlaceHolder]="['Ngày bắt đầu', 'Ngày kết thúc']"
+      ></nz-range-picker>
+
+      <button nz-button nzType="primary" type="submit">Tìm kiếm</button>
+    </div>
+  </div>
+</form>
+
+<ng-template #noDataTemplate>
+  <div class="text-center">
+    <img src="../../assets/images/icon/empty-state.svg" class="my-4" />
+    <div class="fw-bold">Chưa có dữ liệu</div>
+    <div>Hãy thêm mới nội dung!</div>
+  </div>
+</ng-template>
+
+<nz-table
+  #basicTable
+  #borderedTable
+  nzBordered
+  [nzData]="historyStaffList || []"
+  [nzNoResult]="noDataTemplate"
+  [nzLoading]="item.loading"
+  [nzTotal]="item.total"
+  [nzFrontPagination]="false"
+  [nzPageSize]="item.paramsQuery.pageSize"
+  [nzPageIndex]="item.paramsQuery.pageNumber"
+  (nzPageIndexChange)="onPageChange($event)"
+  (nzPageSizeChange)="onPageSizeChange($event)"
+>
+  <thead>
+    <tr>
+      <th nzAlign="center">ID</th>
+      <th nzAlign="center">Mã trạm</th>
+      <th nzAlign="center">Sự kiện</th>
+      <th nzAlign="center">Loại hoạt động</th>
+      <th nzAlign="center">Mã cán bộ</th>
+      <th nzAlign="center">Tên hành khách</th>
+      <th nzAlign="center">Số giấy tờ hành khách</th>
+      <th nzAlign="center">Thời gian</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of basicTable.data; track item.id) {
+      <tr>
+        <td nzAlign="center">{{ item.id }}</td>
+        <td nzAlign="center">{{ item.eGateCode }}</td>
+        <td nzAlign="center">{{ item.eventType | eventTypeLabel }}</td>
+        <td nzAlign="center">{{ item.actionType | officerLabel }}</td>
+        <td nzAlign="center">{{ item.username }}</td>
+        <td nzAlign="center">{{ item.passenger?.passenger ?? '-' }}</td>
+        <td nzAlign="center">{{ item.passenger?.idCardNumber ?? '-' }}</td>
+        <td nzAlign="center">{{ item.createdAt | timeView: 'dateOnly' }}</td>
+      </tr>
+    } @empty {}
+  </tbody>
+</nz-table>

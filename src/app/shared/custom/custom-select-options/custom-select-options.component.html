@@ -1,0 +1,68 @@
+<ng-select
+  class="select-options"
+  [class.custom-input-multiple-round]="isMulti"
+  id="occasionIds"
+  [ngClass]="class"
+  [placeholder]="placeholder"
+  [addTagText]="'Thêm'"
+  [clearable]="false"
+  [multiple]="isMulti"
+  [addTag]="allowAddNew ? newItem : false"
+  [clearSearchOnAdd]="true"
+  [closeOnSelect]="!isMulti"
+  [(ngModel)]="value"
+  (close)="handleCloseEvent($event)"
+  appendTo=".modal-add-edit-product"
+  [items]="items"
+  bindLabel="{{ bindLabel }}"
+  bindValue="{{ bindValue }}"
+  (change)="handleChangeEvent($event)"
+  [notFoundText]="'Không có dữ liệu'"
+>
+  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+    <span class="ng-value-icon me-2" (click)="clear(item)">×</span>
+    <div>
+      {{ item.name ?? '-' }}
+    </div>
+  </ng-template>
+  <ng-template ng-option-tmp let-item="item">
+    @if (item.isEdit) {
+      <div class="d-flex" (click)="$event.stopPropagation()">
+        <input
+          [style.width]="'80%'"
+          (click)="$event.stopPropagation()"
+          type="text"
+          class="input-medium"
+          [(ngModel)]="item.name"
+        />
+        <span class="d-flex align-items-center">
+          <i
+            class="btn fa-solid fa-check"
+            style="color: #63e6be"
+            (click)="handleSubmitChange(item, $event)"
+          ></i>
+          <i
+            (click)="handleCancelChange(item, $event)"
+            class="btn fa-solid fa-xmark"
+            style="color: #d82c2c"
+          ></i>
+        </span>
+      </div>
+    } @else {
+      <div>
+        {{ item.name ?? '-' }}
+        <span class="custom-options">
+          <i
+            class="fa-solid fa-pencil p-1 me-2"
+            (click)="handleEditOption(item, $event)"
+          ></i>
+          <i
+            (click)="handleRemoveOption(item, $event)"
+            class="fa-regular fa-trash-can"
+            style="color: #d82c2c"
+          ></i>
+        </span>
+      </div>
+    }
+  </ng-template>
+</ng-select>

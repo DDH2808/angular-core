@@ -1,0 +1,395 @@
+<ng-container *transloco="let tc; read: 'common'">
+  <ng-container *transloco="let t; read: 'auth'">
+    <div class="login-site row">
+      <div class="left col-12 col-md-6 center-item">
+        <div class="content">
+          <img class="logo mb-2" src="assets/images/sidebar/logo.png" alt="" />
+        </div>
+      </div>
+      <div
+        class="right col-12 col-md-6 d-flex justify-content-center align-items-md-center align-items-start"
+      >
+        <div class="content">
+          <form
+            nz-form
+            [formGroup]="getActiveForm()"
+            (keydown.enter)="onSubmit()"
+            nzLayout="vertical"
+          >
+            @switch (activeTab) {
+              @case (ETabAuth.LOGIN) {
+                <ng-container>
+                  <div class="title-site">{{ t('login') }}</div>
+                  <nz-form-item>
+                    <nz-form-label nzRequired>
+                      {{ t('field.username') }}
+                    </nz-form-label>
+                    <nz-form-control nzErrorTip="Vui lòng nhập tên đăng nhập">
+                      <input
+                        nz-input
+                        nz-form-large
+                        formControlName="username"
+                        placeholder="Nhập tên đăng nhập..."
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <nz-form-item>
+                    <nz-form-label nzRequired>
+                      {{ t('field.password') }}
+                    </nz-form-label>
+                    <nz-form-control nzErrorTip="Vui lòng nhập mật khẩu">
+                      <nz-input-group
+                        nzSize="large"
+                        [nzSuffix]="suffixTemplate"
+                      >
+                        <input
+                          nz-input
+                          nzSize="large"
+                          [type]="passwordVisible ? 'text' : 'password'"
+                          formControlName="password"
+                          placeholder="Nhập mật khẩu"
+                        />
+                      </nz-input-group>
+                      <ng-template #suffixTemplate>
+                        <i
+                          nz-icon
+                          [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                          (click)="passwordVisible = !passwordVisible"
+                        ></i>
+                      </ng-template>
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <div class="button-forgot-pass">
+                    <span
+                      (click)="handleRedirectType(ETabAuth.FORGOT_PASSWORD)"
+                    >
+                      {{ t('forgotPassword') }}
+                    </span>
+                  </div>
+                  <custom-button-loading
+                    (action)="!loading.submit && onSubmit()"
+                    [isLoading]="loading.submit"
+                    [type]="'button'"
+                    [textButton]="tc('button.login')"
+                    [className]="'login-button btn'"
+                  ></custom-button-loading>
+                  <div class="separate-text">{{ t('noAccount') }}</div>
+                  <button
+                    (click)="handleRedirectType(ETabAuth.REGISTER)"
+                    type="button"
+                    class="registry-button btn"
+                  >
+                    {{ tc('button.register') }}
+                  </button>
+                </ng-container>
+              }
+              @case (ETabAuth.REGISTER) {
+                <ng-container>
+                  <div class="title-site">{{ t('register') }}</div>
+                  <nz-form-item>
+                    <nz-form-label nzRequired>
+                      {{ t('field.fullName') }}
+                    </nz-form-label>
+                    <nz-form-control nzErrorTip="Vui lòng nhập họ và tên">
+                      <input
+                        nz-input
+                        nz-form-large
+                        formControlName="fullName"
+                        placeholder="Nhập Họ và Tên..."
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <nz-form-item>
+                    <nz-form-label nzRequired>
+                      {{ t('field.email') }}
+                    </nz-form-label>
+                    <nz-form-control nzErrorTip="Vui lòng nhập email hợp lệ">
+                      <input
+                        nz-input
+                        nz-form-large
+                        formControlName="email"
+                        placeholder="Nhập Email..."
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <nz-form-item>
+                    <nz-form-label nzRequired>
+                      {{ t('field.password') }}
+                    </nz-form-label>
+                    <nz-form-control
+                      nzErrorTip="Mật khẩu phải có ít nhất 6 ký tự"
+                    >
+                      <nz-input-group [nzSuffix]="suffixTemplatePassword">
+                        <input
+                          nz-input
+                          [type]="passwordVisible ? 'text' : 'password'"
+                          formControlName="password"
+                          placeholder="Nhập mật khẩu"
+                        />
+                      </nz-input-group>
+                      <ng-template #suffixTemplatePassword>
+                        <i
+                          nz-icon
+                          [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                          (click)="passwordVisible = !passwordVisible"
+                        ></i>
+                      </ng-template>
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <nz-form-item>
+                    <nz-form-label nzRequired>
+                      {{ t('field.confirmPassword') }}
+                    </nz-form-label>
+                    <nz-form-control nzErrorTip="Mật khẩu xác nhận không khớp">
+                      <nz-input-group [nzSuffix]="suffixTemplateRePassword">
+                        <input
+                          nz-input
+                          [type]="rePasswordVisible ? 'text' : 'password'"
+                          formControlName="rePassword"
+                          placeholder="Nhập lại mật khẩu"
+                        />
+                      </nz-input-group>
+                      <ng-template #suffixTemplateRePassword>
+                        <i
+                          nz-icon
+                          [nzType]="rePasswordVisible ? 'eye-invisible' : 'eye'"
+                          (click)="rePasswordVisible = !rePasswordVisible"
+                        ></i>
+                      </ng-template>
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <custom-button-loading
+                    (action)="!loading.submit && onSubmit()"
+                    [isLoading]="loading.submit"
+                    [type]="'button'"
+                    [textButton]="'Đăng ký'"
+                    [className]="'login-button btn'"
+                  ></custom-button-loading>
+                  <div class="separate-text">{{ t('alreadyHaveAccount') }}</div>
+                  <button
+                    (click)="handleRedirectType(ETabAuth.LOGIN)"
+                    type="button"
+                    class="registry-button btn"
+                  >
+                    {{ tc('button.login') }}
+                  </button>
+                </ng-container>
+              }
+              @case (ETabAuth.FORGOT_PASSWORD) {
+                <ng-container>
+                  <div class="title-site d-flex flex-column">
+                    {{ t('forgotPassword') }}
+                    <div class="sub-title mt-2">{{ t('sendEmail') }}</div>
+                  </div>
+                  <nz-form-item>
+                    <nz-form-label nzRequired>
+                      {{ t('field.email') }}
+                    </nz-form-label>
+                    <nz-form-control nzErrorTip="Vui lòng nhập email hợp lệ">
+                      <input
+                        nz-input
+                        formControlName="email"
+                        placeholder="Nhập Email..."
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <custom-button-loading
+                    (action)="!loading.submit && onSubmit()"
+                    [isLoading]="loading.submit"
+                    [type]="'button'"
+                    [textButton]="t('resetPassword')"
+                    [className]="'login-button btn'"
+                  ></custom-button-loading>
+                  <div class="separate-text cursor-pointer">
+                    <span (click)="handleRedirectType(ETabAuth.LOGIN)">
+                      <i class="fa-solid fa-arrow-left me-2"></i>
+                      {{ tc('button.login') }}
+                    </span>
+                  </div>
+                </ng-container>
+              }
+              @case (ETabAuth.RECOVER_PASSWORD) {
+                <ng-container>
+                  <div class="title-site d-flex flex-column">
+                    {{ t('recoverPassword') }}
+                    <div class="sub-title mt-2">
+                      {{ t('typeOtpAndPassword') }}
+                    </div>
+                  </div>
+                  <nz-form-item>
+                    <nz-form-label nzRequired>
+                      {{ t('field.otp') }}
+                    </nz-form-label>
+                    <nz-form-control nzErrorTip="Vui lòng nhập OTP">
+                      <input
+                        nz-input
+                        formControlName="otp"
+                        placeholder="Nhập OTP"
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <div class="form-item">
+                    <span>Không nhận được mã?</span>
+                    <span class="fw-500 ms-2">
+                      @if (timeRemaining$ | async) {
+                        <span class="text-danger">
+                          {{ timeRemaining$ | async | date: 'mm:ss' }}
+                        </span>
+                      } @else {
+                        <span
+                          class="text-link cursor-pointer"
+                          (click)="handleForgotPass(true)"
+                        >
+                          Gửi lại mã
+                        </span>
+                      }
+                    </span>
+                  </div>
+
+                  <nz-form-item>
+                    <nz-form-label nzRequired>
+                      {{ t('field.newPassword') }}
+                    </nz-form-label>
+                    <nz-form-control
+                      nzErrorTip="Mật khẩu phải có ít nhất 6 ký tự"
+                    >
+                      <nz-input-group [nzSuffix]="suffixTemplateNewPassword">
+                        <input
+                          nz-input
+                          [type]="newPasswordVisible ? 'text' : 'password'"
+                          formControlName="newPassword"
+                          placeholder="Nhập Mật khẩu mới..."
+                        />
+                      </nz-input-group>
+                      <ng-template #suffixTemplateNewPassword>
+                        <i
+                          nz-icon
+                          [nzType]="
+                            newPasswordVisible ? 'eye-invisible' : 'eye'
+                          "
+                          (click)="newPasswordVisible = !newPasswordVisible"
+                        ></i>
+                      </ng-template>
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <custom-button-loading
+                    (action)="!loading.submit && onSubmit()"
+                    [isLoading]="loading.submit"
+                    [type]="'button'"
+                    [textButton]="t('resetPassword')"
+                    [className]="'login-button btn'"
+                  ></custom-button-loading>
+                  <div class="separate-text cursor-pointer">
+                    <span (click)="handleRedirectType(ETabAuth.LOGIN)">
+                      <i class="fa-solid fa-arrow-left me-2"></i>
+                      {{ tc('button.login') }}
+                    </span>
+                  </div>
+                </ng-container>
+              }
+              @case (ETabAuth.VERIFY_OTP) {
+                <ng-container>
+                  <div class="title-site d-flex flex-column">
+                    {{ t('verifyOtp') }}
+                    <div class="sub-title mt-2">{{ t('typeOtp') }}</div>
+                  </div>
+                  <nz-form-item>
+                    <nz-form-label nzRequired>
+                      {{ t('field.otp') }}
+                    </nz-form-label>
+                    <nz-form-control nzErrorTip="Vui lòng nhập OTP">
+                      <input
+                        nz-input
+                        formControlName="otp"
+                        placeholder="Nhập OTP"
+                      />
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <div class="form-item">
+                    <span>Không nhận được mã?</span>
+                    <span class="fw-500 ms-2">
+                      @if (timeRemaining$ | async) {
+                        <span class="text-danger">
+                          {{ timeRemaining$ | async | date: 'mm:ss' }}
+                        </span>
+                      } @else {
+                        <span
+                          class="text-link cursor-pointer"
+                          (click)="handleRegister(true)"
+                        >
+                          Gửi lại mã
+                        </span>
+                      }
+                    </span>
+                  </div>
+
+                  <custom-button-loading
+                    (action)="!loading.submit && onSubmit()"
+                    [isLoading]="loading.submit"
+                    [type]="'button'"
+                    [textButton]="t('register')"
+                    [className]="'login-button btn'"
+                  ></custom-button-loading>
+                  <div class="separate-text cursor-pointer">
+                    <span (click)="handleRedirectType(ETabAuth.LOGIN)">
+                      <i class="fa-solid fa-arrow-left me-2"></i>
+                      {{ tc('button.login') }}
+                    </span>
+                  </div>
+                </ng-container>
+              }
+            }
+          </form>
+        </div>
+        <div class="languages-flag">
+          <div class="btn-group" dropdown placement="bottom right">
+            <img
+              [src]="'assets/images/icon-countries/' + language + '.svg'"
+              width="30"
+              height="20"
+              alt="language"
+              aria-controls="dropdown-alignment"
+              class="flag cursor-pointer"
+              dropdownToggle
+              id="button-change"
+            />
+            <ul
+              *dropdownMenu
+              aria-labelledby="button-alignment"
+              class="dropdown-menu dropdown-menu-right"
+              id="button-change-alignment"
+              role="menu"
+            >
+              <li
+                *ngFor="let language of languages"
+                (click)="handleChangeLanguage(language.value)"
+                role="menuitem"
+              >
+                <span class="dropdown-item">
+                  <img
+                    class="me-2"
+                    width="20"
+                    height="15"
+                    src="assets/images/icon-countries/{{ language.value }}.svg"
+                    alt=""
+                  />
+                  {{ language.label }}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

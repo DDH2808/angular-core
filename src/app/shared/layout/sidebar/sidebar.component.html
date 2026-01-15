@@ -1,0 +1,131 @@
+<div #sidebar class="sidebar sidebar-mobile" [ngClass]="{open: isOpen}">
+  <div>
+    <div class="logo-details d-flex align-items-center justify-content-center">
+      <img
+        *ngIf="isOpen"
+        loading="lazy"
+        width="180"
+        src="./assets/images/sidebar/logo.png"
+        alt="logo"
+        class="rounded-circle"
+        (click)="toggleBar()"
+      />
+      <button
+        class="border-0 bg-transparent text-white fs-3"
+        *ngIf="!isOpen"
+        (click)="toggleBar()"
+      >
+        <i class="fa-solid fa-bars" id="btn"></i>
+      </button>
+    </div>
+    <ul
+      class="nav-list"
+      [ngClass]="{
+        'align-items-md-center': !isOpen,
+        'align-items-start': isOpen
+      }"
+    >
+      @for (item of currentSidebars; track 'link'; let index = $index) {
+        @if (item?.children?.length) {
+          <li
+            (click)="item?.children?.length && toggleSubmenu(index)"
+            class="nav-item"
+          >
+            <a
+              [ngClass]="{
+                active: item.isActive,
+                disabled: item.disabled,
+                hasChildren: true
+              }"
+              (click)="$event.preventDefault()"
+            >
+              <img [src]="item.icon" alt="" class="icon" />
+              <img [src]="item.iconActive" alt="" class="iconActive" />
+              <span class="links_name">{{ item.name }}</span>
+              @if (!isOpen) {
+                @if (item?.children?.length) {
+                  <div
+                    class="item__child"
+                    [ngClass]="{'placement-top': index > 6}"
+                  >
+                    <a
+                      *ngFor="let child of item.children"
+                      [routerLink]="'/' + child.link"
+                      class="item-link"
+                    >
+                      {{ child.name }}
+                    </a>
+                  </div>
+                } @else {
+                  <span class="tooltip">{{ item.name }}</span>
+                }
+              }
+              <i
+                *ngIf="item?.children?.length"
+                class="fa-solid ms-auto icon-{{ index }} fa-caret-down"
+                [ngClass]="{
+                  'i-active': item.isActive,
+                  'text-white': !item.isActive,
+                  'd-none': !isOpen
+                }"
+              ></i>
+            </a>
+          </li>
+          <div class="sub-menu sub-menu-{{ index }}">
+            @for (child of item?.children; track $index) {
+              <a
+                (click)="onClickNav($event)"
+                [routerLink]="'/' + child.link"
+                [ngClass]="{active: child.isActive}"
+              >
+                <span class="links_name">{{ child.name }}</span>
+              </a>
+            }
+          </div>
+        } @else {
+          <li class="nav-item">
+            <a
+              [ngClass]="{active: item.isActive, disabled: item.disabled}"
+              [routerLink]="'/' + item.link"
+              (click)="onClickNav($event)"
+            >
+              <img [src]="item.icon" alt="" class="icon" />
+              <img [src]="item.iconActive" alt="" class="iconActive" />
+              <span class="links_name">{{ item.name }}</span>
+              @if (!isOpen) {
+                <span class="tooltip">{{ item.name }}</span>
+              }
+              <i
+                *ngIf="item?.children?.length"
+                class="fa-solid ms-auto icon-{{ index }} fa-caret-down"
+                [ngClass]="{
+                  'i-active': item.isActive,
+                  'text-white': !item.isActive,
+                  'd-none': !isOpen
+                }"
+              ></i>
+            </a>
+          </li>
+        }
+      }
+    </ul>
+  </div>
+  <div class="profile-details" [ngClass]="{'justify-content-between': isOpen}">
+    <div
+      [ngClass]="{'justify-content-center': !isOpen}"
+      [routerLink]="'//account'"
+    >
+      <img
+        width="32"
+        height="32"
+        src="{{ user?.avatar || './assets/images/default-avatar.jpg' }}"
+        fallback
+        alt="profileImg"
+      />
+      <div class="name" *ngIf="isOpen">{{ user?.fullName }}</div>
+    </div>
+    <button *ngIf="isOpen" (click)="handleLogout()">
+      <i class="fa fa-sign-out" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>

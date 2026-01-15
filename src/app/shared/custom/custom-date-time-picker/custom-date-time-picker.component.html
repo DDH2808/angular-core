@@ -1,0 +1,45 @@
+<div
+  class="custom-date-time-picker"
+  [ngClass]="className"
+  [class.disabled]="isDisabled"
+>
+  <input
+    [(ngModel)]="valueInput"
+    type="text"
+    [readonly]="true"
+    (click)="openModal(template)"
+    [placeholder]="placeholder"
+    [disabled]="isDisabled"
+    [ngClass]="{disabled: isDisabled}"
+  />
+  <img
+    ngSrc="./assets/images/icon/date.svg"
+    alt="icon"
+    class="icon"
+    height="15"
+    width="14"
+  />
+</div>
+
+<ng-template #template>
+  <div class="custom-modal-datetime-picker">
+    <div class="modal-body">
+      <div>
+        <bs-datepicker-inline
+          (bsValueChange)="handleChangeDate($event)"
+          [bsValue]="bsInlineValue"
+          [bsConfig]="bsConfig"
+        ></bs-datepicker-inline>
+      </div>
+      <div class="mt-3 d-flex justify-content-center">
+        <timepicker [(ngModel)]="mytime"></timepicker>
+      </div>
+      <div class="mt-3 d-flex justify-content-center gap-2">
+        <button (click)="onHideModal()" class="btn btn-default">Cancel</button>
+        <button (click)="handleConfirm()" class="btn btn-neutral text-white">
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

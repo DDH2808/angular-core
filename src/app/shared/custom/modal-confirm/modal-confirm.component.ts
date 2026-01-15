@@ -1,0 +1,157 @@
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import {distinctUntilChanged, of, Subject, switchMap, takeUntil} from 'rxjs';
+import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap/modal';
+import {ModalConfirmService} from './modal-confirm.service';
+import {CommonModule} from '@angular/common';
+import {ReactiveFormsModule} from '@angular/forms';
+
+export interface IModalConfirmContent {
+  title?: string;
+  description?: string;
+  okText?: string;
+  cancelText?: string;
+  type?: 'warning' | 'info' | string;
+  modalType?: 'default' | 'advance' | string;
+  context?: any;
+  errorState?: string;
+}
+
+@Component({
+  selector: 'modal-confirm',
+  templateUrl: './modal-confirm.component.html',
+  styleUrls: ['./modal-confirm.component.scss'],
+  providers: [BsModalService],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, ModalModule],
+})
+export class ModalConfirmComponent implements OnInit, OnDestroy {
+  @ViewChild('template', {static: true}) template!: TemplateRef<any>;
+  @ViewChild('templateAdvance', {static: true})
+  protected templateAdvance!: TemplateRef<any>;
+  @Input() key?: string;
+
+  public modalContent: IModalConfirmContent = {
+    title: 'Xác nhận',
+    description: '',
+    okText: undefined,
+    cancelText: undefined,
+    type: 'warning',
+    modalType: 'default',
+  };
+  public templateWillShow: TemplateRef<any> = this.template;
+  private destroy$ = new Subject();
+  protected modalRef?: BsModalRef;
+  protected isOpenBackdrop = false;
+  public isClickOverlay: boolean = false;
+  public okFunc?: Function | null;
+  public declineFunc?: Function | null;
+
+  constructor(
+    private modalService: BsModalService,
+    private modalConfirmService: ModalConfirmService,
+    private renderer: Renderer2,
+  ) {}
+
+  ngOnInit(): void {
+    this.modalConfirmService?.okFunc
+      .pipe()
+      .subscribe((okFunc: Function | null) => {
+        this.okFunc = okFunc;
+      });
+    this.modalConfirmService?.declineFunc
+      .pipe()
+      .subscribe((declineFunc: Function | null) => {
+        this.declineFunc = declineFunc;
+      });
+    this.modalConfirmService?.modalType
+      .pipe()
+      .subscribe((modalType: string) => {
+        if (modalType === 'advance') {
+          this.templateWillShow = this.templateAdvance;
+        } else {
+          this.templateWillShow = this.template;
+        }
+      });
+    this.modalConfirmService?.toggleModal
+      .pipe(
+        distinctUntilChanged(),
+        takeUntil(this.destroy$),
+        switchMap(({isOpen, key}) => {
+          this.modalConfirmService?.modalContent
+            .pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+            .subscribe((modalContent: IModalConfirmContent) => {
+              this.modalContent = Object.assign(
+                this.modalContent,
+                modalContent,
+              );
+            });
+          if (key === this.key) {
+            return of(isOpen);
+          } else return of(false);
+        }),
+      )
+      .subscribe((isOpen: boolean) => {
+        if (isOpen) {
+          this.openModal(this.modalContent);
+        }
+      });
+
+    this.modalService.onHide.subscribe(() => {
+      this.isOpenBackdrop = false;
+      this.modalConfirmService.closeModal();
+    });
+  }
+
+  openModal(modalContent: IModalConfirmContent) {
+    this.isOpenBackdrop = true;
+    this.modalRef = this.modalService.show(this.templateWillShow, {
+      class: 'modal-md modal-confirm modal-confirm-default',
+      backdrop: false,
+      ignoreBackdropClick: true,
+      keyboard: false,
+    });
+    const onHidden = this.modalService.onHidden.subscribe(() => {
+      this.renderer.removeStyle(document.body, 'overflow-y');
+      onHidden.unsubscribe();
+    });
+  }
+
+  confirm(): void {
+    this.okFunc?.();
+    this.hideModal();
+  }
+
+  decline(): void {
+    this.declineFunc?.();
+    this.hideModal();
+  }
+
+  hideModal() {
+    this.modalRef?.hide();
+    this.modalConfirmService.closeModal();
+    this.isOpenBackdrop = false;
+  }
+
+  handleClickOverlay($event: any) {
+    $event.preventDefault();
+    this.isClickOverlay = true;
+    if (this.isClickOverlay) {
+      setTimeout(() => {
+        this.isClickOverlay = false;
+      }, 2000);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
+}

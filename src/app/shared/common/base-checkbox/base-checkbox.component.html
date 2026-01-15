@@ -1,0 +1,14 @@
+<label class="basic-checkbox">
+  <div class="ms-2">{{ label }}</div>
+  <input
+    [class.disabled]="disabled"
+    [readonly]="disabled"
+    [disabled]="disabled"
+    (change)="checkedChange.emit({checked: $any($event).target.checked, value})"
+    [checked]="checked"
+    name="activeButtons"
+    type="checkbox"
+    [value]="value"
+  />
+  <span class="checkmark"></span>
+</label>

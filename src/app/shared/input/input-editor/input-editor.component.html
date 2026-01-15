@@ -1,0 +1,8 @@
+<ckeditor
+  #editor
+  [config]="config"
+  [editor]="Editor"
+  [(ngModel)]="value"
+  (change)="onChange($any($event))"
+  (ready)="onReady($event)"
+></ckeditor>

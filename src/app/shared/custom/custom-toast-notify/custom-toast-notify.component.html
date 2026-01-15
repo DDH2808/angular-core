@@ -1,0 +1,32 @@
+<div class="custom-toast-notify" [ngClass]="showToast ? 'show' : ''">
+  <ng-container>
+    <div
+      class="p-2 d-flex align-items-center justify-content-between"
+      [ngClass]="type ? type : ''"
+    >
+      <div class="d-flex align-items-center gap-2">
+        <img
+          *ngIf="type !== EIntegrationStatus.PROGRESSING"
+          class="icon-status"
+          [src]="
+            type === EIntegrationStatus.ERROR
+              ? './assets/images/icon/error.svg'
+              : './assets/images/icon/tick-circle.svg'
+          "
+        />
+        <i
+          *ngIf="type === EIntegrationStatus.PROGRESSING"
+          class="fa-solid fa-spinner fa-spin"
+        ></i>
+        <div class="message">{{ message }}</div>
+      </div>
+      <button class="btn" (click)="handleClickToast()">
+        <i
+          *ngIf="type === EIntegrationStatus.ERROR"
+          class="fa-solid fa-xmark"
+        ></i>
+        <span *ngIf="type !== EIntegrationStatus.ERROR">Chi tiết</span>
+      </button>
+    </div>
+  </ng-container>
+</div>

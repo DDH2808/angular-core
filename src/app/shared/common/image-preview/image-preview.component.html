@@ -1,0 +1,22 @@
+<ng-template #template>
+  <div class="image-preview">
+    <div class="close-image" (click)="hideModal()">
+      <i class="fa-solid fa-circle-xmark"></i>
+    </div>
+    <div class="image-prev" [class.hide]="images.length <= 1">
+      <i
+        class="fa-solid fa-circle-chevron-left"
+        (click)="deIncrementIndex()"
+      ></i>
+    </div>
+    <div class="image-body">
+      <img [src]="images[indexImage]" alt="###" class="image" />
+    </div>
+    <div class="image-next" [class.hide]="images.length <= 1">
+      <i
+        class="fa-solid fa-circle-chevron-right"
+        (click)="incrementIndex()"
+      ></i>
+    </div>
+  </div>
+</ng-template>

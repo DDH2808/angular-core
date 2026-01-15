@@ -1,0 +1,76 @@
+@use './variable' as vars;
+@use './mixins' as mixins;
+
+.image-preview {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  justify-content: center;
+
+  .image-preview {
+    box-sizing: border-box;
+    font-size: 30px;
+  }
+
+  .image-body {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 51px;
+  }
+
+  .image {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    box-shadow: 5px 5px 20px black;
+  }
+  .image-prev {
+    position: fixed;
+    top: 48%;
+    left: 5%;
+    color: vars.$neutral-100;
+    cursor: pointer;
+    font-size: 35px;
+
+    &:hover {
+      color: vars.$neutral-200;
+    }
+  }
+
+  .image-next {
+    position: fixed;
+    top: 48%;
+    right: 5%;
+    color: vars.$neutral-100;
+    cursor: pointer;
+    font-size: 35px;
+
+    &:hover {
+      color: vars.$neutral-200;
+    }
+  }
+
+  .close-image {
+    position: fixed;
+    top: 10px;
+    right: 5%;
+    color: vars.$neutral-100;
+    cursor: pointer;
+    font-size: 35px;
+
+    &:hover {
+      color: vars.$neutral-200;
+    }
+  }
+  .hide {
+    display: none;
+  }
+}
